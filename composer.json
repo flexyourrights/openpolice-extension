@@ -1,0 +1,45 @@
+{
+    "name": "flexyourrights/openpolice-extension",
+    "description": "This package provides a starting point to build country-specific variations of OpenPolice.org.",
+    "keywords": [
+    	"Open Police",
+    	"Open Police Complaints",
+    	"Flex Your Rights", 
+    	"survey", 
+    	"misconduct", 
+    	"compliments", 
+    	"commendations", 
+    	"police departments", 
+    	"oversight", 
+    	"accountability",
+    	"Laravel", 
+    	"Survloop"                            
+    ],
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Morgan Lesko",
+            "homepage": "https://github.com/flexyourrights/openpolice",
+            "email": "morgan@flexyourrights.org",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "flexyourrights/openpolice": "0.3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "FlexYourRights\\OpenPoliceExtension\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FlexYourRights\\OpenPoliceExtension\\OpenPoliceExtensionServiceProvider"
+            ],
+            "aliases": {
+                "OpenPoliceExtension": "FlexYourRights\\OpenPoliceExtension\\OpenPoliceExtensionFacade"
+            }
+        }
+    }
+}
