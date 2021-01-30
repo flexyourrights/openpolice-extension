@@ -1,4 +1,13 @@
 <?php
+/**
+  * OpenPoliceExtensionServiceProvider in Laravel extension
+  * which copies files where they are needed after installation.
+  *
+  * OpenPolice.org
+  * @package  flexyourrights/openpolice-extension
+  * @author  Morgan Lesko <morgan@flexyourrights.org>
+  * @since  v0.3.0
+  */
 namespace FlexYourRights\OpenPoliceExtension;
 
 use Illuminate\Support\ServiceProvider;
@@ -8,11 +17,11 @@ class OpenPoliceExtensionServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->app->bind('openpolice', function($app) {
+        $this->app->bind('openpoliceextension', function($app) {
             return new OpenPoliceFacade();
         });
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
-        //$this->loadViewsFrom(__DIR__ . '/Views', 'openpolice');
+        /*
         $dbMig = '2021_01_28_000000_create_openpolice_tables';
         $this->publishes([
             __DIR__.'/Views'   => base_path('resources/views/vendor/openpolice'),
@@ -30,5 +39,6 @@ class OpenPoliceExtensionServiceProvider extends ServiceProvider
             base_path('/vendor/flexyourrights/openpolice-website/src')
                 => base_path('storage/app/up/openpolice')
         ]);
+        */
     }
 }

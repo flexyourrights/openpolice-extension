@@ -1,7 +1,7 @@
 <?php
 /**
   * OpenPoliceExtension the core top-level class for which extends
-  * and can override many functions specific to OpenPolice.org.
+  * and can override many functions specific to OpenPolice.org & Survloop.
   *
   * OpenPolice.org
   * @package  flexyourrights/openpolice-extension

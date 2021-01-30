@@ -1,5 +1,5 @@
 
-# FlexYourRights/OpenPolice
+# FlexYourRights/OpenPoliceExtension
 
 [![Laravel](https://img.shields.io/badge/Laravel-8.5-orange.svg?style=flat-square)](http://laravel.com)
 [![Survloop](https://img.shields.io/badge/Survloop-0.3-orange.svg?style=flat-square)](https://github.com/rockhopsoft/survloop)
@@ -17,33 +17,23 @@
 
 
 # <a name="about"></a>About
-Code bytes measured as stored on Mac disk:
-* PHP Controllers ~ 741 KB (17%)
-* Blade Template Views HTML with some JS CSS ~ 668 KB (16%)
-* Survloop-Generated PHP Eloquent Data Table Models ~ 340 KB (8%)
-* Survloop-Generated PHP Laravel Database Migration & Seeders ~ 2.5 MB (59%)
 
-<a href="https://packagist.org/packages/flexyourrights/openpolice-departments" target="_blank"
->Separate package</a>:
-* Survloop-Generated PHP Police Departments & Oversight Seeders ~ 15.9 MB
-
-OpenPolice is an open-source, open data web app empowering citizens to prepare, file, and track reports of police conduct. The site helps users submit complaints or commendations to appropriate police oversight agencies. By allowing users to publish reports online, we aim to establish better public transparency and oversight of police activity in the U.S. OpenPolice extends <a href="https://github.com/rockhopsoft/survloop" target="_blank">Survloop</a>, which runs atop <a href="https://laravel.com/" target="_blank">Laravel</a>.
+This package provides a starting point to build variations of OpenPolice.org. Hopefully, you should be able to...
+* Make a copy of this repository for your new project
+* In you new project, replace all FlexYourRights\OpenPoliceExtension references with your package's primary class name, like MyVendorName\MyOpenPoliceProject"
+* Replace all flexyourrights\openpolice-extension references with your package's directory, like my-org-name\my-open-police-project"
+* 
 
 <a href="https://openpolice.org" target="_blank">OpenPolice.org</a>
-This software began as an internal tool to design our database, then prototype survey generation. Then it was adapted to the Laravel framework, and has continued to grow towards a content-management system for data-focused websites.
-
-The upcoming OpenPolice web app can be tested out here, feedback welcome via the end of the <b>beta demo</b> submission process: <a href="https://openpolice.org/file-your-police-complaint" target="_blank">/file-your-police-complaint</a>
-The resulting database designed using the engine, as well as the branching tree which specifies the user's experience: <a href="https://openpolice.org/db/OP" target="_blank">/db/OP</a>, <a href="https://openpolice.org/tree/complaint" target="_blank">/tree/complaint</a>
-Among other methods, the resulting data can also be provided as XML included an automatically generated schema: <a href="https://openpolice.org/complaint-xml-schema" target="_blank">/complaint-xml-schema</a>, <a href="https://openpolice.org/complaint-xml-example" target="_blank">/complaint-xml-example</a>, <a href="https://openpolice.org/complaint-xml-all" target="_blank">/complaint-xml-all</a>
+<a href="https://github.com/flexyourrights/openpolice" target="_blank">OpenPolice.org is an open-source, open data web app</a> empowering citizens to prepare, file, and track reports of police conduct. The site helps users submit complaints or commendations to appropriate police oversight agencies. By allowing users to publish reports online, we aim to establish better public transparency and oversight of police activity in the U.S. OpenPolice extends <a href="https://github.com/rockhopsoft/survloop" target="_blank">Survloop</a>, which runs atop <a href="https://laravel.com/" target="_blank">Laravel</a>.
 
 
 # <a name="requirements"></a>Requirements
 
 * php: >=7.4
 * <a href="https://packagist.org/packages/laravel/laravel" target="_blank">laravel/laravel</a>: 8.5.*
-* <a href="https://packagist.org/packages/rockhopsoft/survloop" target="_blank">rockhopsoft/survloop</a>: >=0.3
-* <a href="https://packagist.org/packages/flexyourrights/openpolice-departments" target="_blank">flexyourrights/openpolice-departments</a>: >=0.*
-* <a href="https://packagist.org/packages/flexyourrights/openpolice-website" target="_blank">flexyourrights/openpolice-website</a>: >=0.*
+* <a href="https://packagist.org/packages/rockhopsoft/survloop" target="_blank">rockhopsoft/survloop</a>: >=0.3.*
+* <a href="https://packagist.org/packages/flexyourrights/openpolice" target="_blank">flexyourrights/openpolice</a>: >=0.3.*
 
 # <a name="getting-started"></a>Getting Started
 
@@ -58,7 +48,7 @@ Among other methods, the resulting data can also be provided as XML included an 
 
 ```
 
-Edit the environment file to connect the default MYSQL database:
+Edit these lines of the environment file to connect the default MYSQL database:
 ```
 % nano .env
 ```
@@ -78,12 +68,12 @@ Next, install Laravel's out-of-the-box user authentication tools, Survloop, and 
 ```
 % php artisan key:generate
 % php artisan cache:clear
-% COMPOSER_MEMORY_LIMIT=-1 composer require laravel/ui paragonie/random_compat mpdf/mpdf rockhopsoft/survloop flexyourrights/openpolice
+% COMPOSER_MEMORY_LIMIT=-1 composer require laravel/ui paragonie/random_compat mpdf/mpdf flexyourrights/openpolice-extension
 % php artisan ui vue --auth
 % nano composer.json
 ```
 
-From your Laravel installation's root directory, update `composer.json` to require and easily reference OpenPolice:
+From your Laravel installation's root directory, update `composer.json` to require and easily reference OpenPoliceExtension:
 ```
 $ nano composer.json
 ```
@@ -93,6 +83,7 @@ $ nano composer.json
     ...
     "psr-4": {
         ...
+        "FlexYourRights\\OpenPoliceExtension\\": "vendor/flexyourrights/openpolice-extension/src/",
         "FlexYourRights\\OpenPolice\\": "vendor/flexyourrights/openpolice/src/",
         "RockHopSoft\\Survloop\\": "vendor/rockhopsoft/survloop/src/",
     }
@@ -108,6 +99,7 @@ $ nano config/app.php
 ...
 'providers' => [
     ...
+    FlexYourRights\OpenPoliceExtension\OpenPoliceExtensionServiceProvider::class,
     FlexYourRights\OpenPolice\OpenPoliceServiceProvider::class,
     RockHopSoft\Survloop\SurvloopServiceProvider::class,
     ...
@@ -115,6 +107,7 @@ $ nano config/app.php
 ...
 'aliases' => [
     ...
+    'OpenPoliceExtension' => 'FlexYourRights\OpenPoliceExtension\OpenPoliceExtensionFacade',
     'OpenPolice' => 'FlexYourRights\OpenPolice\OpenPoliceFacade',
     'Survloop' => 'RockHopSoft\Survloop\SurvloopFacade',
     ...
@@ -128,7 +121,9 @@ If installing on a server, you might also need to fix some permissions before th
 
 Clear caches and publish the package migrations...
 ```
-% php artisan optimize:clear
+% php artisan config:cache
+% php artisan route:cache
+% php artisan view:cache
 % echo "0" | php artisan vendor:publish --force
 % composer dump-autoload
 % curl http://myopenpolice.local/css-reload
@@ -136,8 +131,8 @@ Clear caches and publish the package migrations...
 
 With certain databases (like some managed by DigitalOcean), you may need to tweak the Laravel migration:
 ```
-$ nano database/migrations/2014_10_12_100000_create_password_resets_table.php
-$ sudo nano database/migrations/2019_08_19_000000_create_failed_jobs_table.php
+% nano database/migrations/2014_10_12_100000_create_password_resets_table.php
+% nano database/migrations/2019_08_19_000000_create_failed_jobs_table.php
 ```
 Add this line before the "Schema::create" line in each file:
 ```
@@ -148,7 +143,13 @@ Then initialize the database:
 ```
 $ php artisan migrate
 $ php artisan db:seed --class=OpenPoliceSeeder
+```
+And if you want to import our list of United States police departments and zip codes:
+```
 $ php artisan db:seed --class=OpenPoliceDeptSeeder
+$ php artisan db:seed --class=OpenPoliceDeptSeeder2
+$ php artisan db:seed --class=OpenPoliceDeptSeeder3
+$ php artisan db:seed --class=OpenPoliceDeptSeeder4
 $ php artisan db:seed --class=ZipCodeSeeder
 $ php artisan db:seed --class=ZipCodeSeeder2
 $ php artisan db:seed --class=ZipCodeSeeder3
@@ -158,13 +159,13 @@ $ php artisan db:seed --class=ZipCodeSeeder4
 ### Initialize OpenPolice Installation
 
 Then browsing to the home page should prompt you to create the first admin user account:<br />
-http://openpolice.local
+http://myopenpolice.local
 
 If everything looks janky, then manually load the style sheets, etc:<br />
-http://openpolice.local/css-reload
+http://myopenpolice.local/css-reload
 
 After logging in as an admin, this link rebuilds many supporting files:<br />
-http://openpolice.local/dashboard/settings?refresh=2
+http://myopenpolice.local/dashboard/settings?refresh=2
 
 
 # <a name="documentation"></a>Documentation
