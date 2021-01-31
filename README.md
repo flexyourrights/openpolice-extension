@@ -121,9 +121,9 @@ If installing on a server, you might also need to fix some permissions before th
 
 Clear caches and publish the package migrations...
 ```
-% php artisan config:cache
-% php artisan route:cache
-% php artisan view:cache
+% php artisan config:clear
+% php artisan route:clear
+% php artisan view:clear
 % echo "0" | php artisan vendor:publish --force
 % composer dump-autoload
 % curl http://myopenpolice.local/css-reload
