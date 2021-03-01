@@ -68,8 +68,7 @@ Next, install Laravel's out-of-the-box user authentication tools, Survloop, and 
 ```
 % php artisan key:generate
 % php artisan cache:clear
-% COMPOSER_MEMORY_LIMIT=-1 composer require laravel/ui paragonie/random_compat mpdf/mpdf flexyourrights/openpolice-extension
-% php artisan ui vue --auth
+% COMPOSER_MEMORY_LIMIT=-1 composer require flexyourrights/openpolice-extension
 % nano composer.json
 ```
 
